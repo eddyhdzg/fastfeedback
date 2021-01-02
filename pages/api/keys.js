@@ -6,8 +6,9 @@ export default async (_, res) => {
     NEXT_PUBLIC_FIREBASE_PROJECT_ID:
       process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
     FIREBASE_PRIVATE_KEY: process.env.FIREBASE_PRIVATE_KEY,
+    parsed: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
     FIREBASE_CLIENT_EMAIL: process.env.FIREBASE_CLIENT_EMAIL,
-    test: '11'
+    test: '13'
   };
 
   res.status(200).json({ keys });
