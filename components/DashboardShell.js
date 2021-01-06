@@ -11,9 +11,10 @@ import {
   Avatar,
   Icon
 } from '@chakra-ui/react';
+
 import { useAuth } from '@/lib/auth';
-import { LogoIcon } from '@/lib/icons';
 import AddSiteModal from './AddSiteModal';
+import { LogoIcon } from '@/lib/icons';
 
 const DashboardShell = ({ children }) => {
   const { user, signout } = useAuth();
@@ -30,26 +31,27 @@ const DashboardShell = ({ children }) => {
           margin="0 auto"
           w="full"
           px={8}
+          h="70px"
         >
-          <Flex alignItems="center">
+          <Flex>
             <LogoIcon boxSize="24px" mr={8} />
             <Link mr={4}>Sites</Link>
             <Link>Feedback</Link>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
-            <Button variant="ghost" mr={2} onClick={() => signout()}>
-              Log Out
-            </Button>
-            {user && <Avatar size="sm" src={user.photoUrl} />}
+            {user && (
+              <Button variant="ghost" mr={2} onClick={() => signout()}>
+                Log Out
+              </Button>
+            )}
+            <Avatar size="sm" src={user?.photoUrl} />
           </Flex>
         </Flex>
       </Flex>
       <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
         <Breadcrumb>
           <BreadcrumbItem>
-            <BreadcrumbLink color="gray.700" fontSize="sm">
-              Sites
-            </BreadcrumbLink>
+            <BreadcrumbLink>Sites</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
         <Flex justifyContent="space-between">
