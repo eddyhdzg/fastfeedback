@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
+
 import Feedback from '@/components/Feedback';
 import { useAuth } from '@/lib/auth';
 import { createFeedback } from '@/lib/db';
@@ -13,7 +14,8 @@ export async function getStaticProps(context) {
   return {
     props: {
       initialFeedback: feedback
-    }
+    },
+    revalidate: 1
   };
 }
 
@@ -31,7 +33,7 @@ export async function getStaticPaths() {
   };
 }
 
-const SiteFeedback = ({ initialFeedback }) => {
+const FeedbackPage = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
@@ -74,9 +76,10 @@ const SiteFeedback = ({ initialFeedback }) => {
         </Box>
       )}
       {allFeedback.map((feedback) => (
-        <Feedback key={feedback.createdAt} {...feedback} />
+        <Feedback key={feedback.id} {...feedback} />
       ))}
     </Box>
   );
 };
-export default SiteFeedback;
+
+export default FeedbackPage;
